@@ -1,17 +1,19 @@
 body {
-
+    background-color: #fff;
+    color: #333;
 }
 
 .done-true {
     text-decoration: line-through;
+    background-color: #fff;
     color: #ddd;
 }
 
-li.ng-enter {
+.ng-enter {
     transition: opacity 1s ease;
     opacity: 0;
 }
 
-li.ng-enter-active {
+.ng-enter-active {
     opacity: 1;
 }

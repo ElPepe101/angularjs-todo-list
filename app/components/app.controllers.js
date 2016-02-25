@@ -7,17 +7,30 @@ app.controller("homeCtrl", ["Task", function(Task)
 {
     var self = this;
 
+    /**
+     * Active list
+     * @type {Number}
+     */
     self.currentList = 0;
 
+    /**
+     * All tasks from active list
+     * @type {Array}
+     */
     self.tasks = Task.getTasks(self.currentList);
 
+    /**
+     * Add new task to active list
+     * @return {Void}
+     */
     self.addTask = function()
     {
-        if(!self.taskText)
+        if(!self.taskText)                                  // Prevent if empty
             return false;
 
-        var id = Task.addTask(self.taskText);
-        return Task.changeTaskList(id, self.currentList);
+        var id = Task.addTask(self.taskText);               // add task to collection
+        self.taskText = "";                                 // Clean input
+        return Task.changeTaskList(id, self.currentList);   // Assign to current active list
     };
 
     self.completeTask = function(taskId)
