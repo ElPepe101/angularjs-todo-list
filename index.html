@@ -27,24 +27,26 @@
         </div>
 
         <!-- INI TEMPLATES -->
+        <!-- View: test -->
         <script type="text/ng-template" id="/view/test">
             <h2>Lorem ipsum...</h2>
         </script>
 
+        <!-- View: home -->
         <script type="text/ng-template" id="/view/home">
-            <div class="todo-form">
-                <form role="form">
-                    <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
-                </form>
-                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTask()">Add</button>
-            </div>
-
-            <div class="todo-list">
-                <div data-tasks></div>
-            </div>
-
+            <div class="todo-form" data-form></div>
+            <div class="todo-list" data-tasks></div>
         </script>
 
+        <!-- Partial: form -->
+        <script type="text/ng-template" id="/partial/form">
+            <form role="form">
+                <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTask()">Add Task</button>
+            </form>
+        </script>
+
+        <!-- Partial: task -->
         <script type="text/ng-template" id="/partial/task">
             <ul class="list-unstyled"></ul>
                 <li class="checkbox" data-ng-repeat="task in list.tasks">

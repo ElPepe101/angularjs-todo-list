@@ -6,3 +6,12 @@ body {
     text-decoration: line-through;
     color: #ddd;
 }
+
+li.ng-enter {
+    transition: opacity 1s ease;
+    opacity: 0;
+}
+
+li.ng-enter-active {
+    opacity: 1;
+}

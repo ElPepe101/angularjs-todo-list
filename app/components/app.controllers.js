@@ -13,7 +13,6 @@ app.controller("homeCtrl", ["Task", function(Task)
 
     self.addTask = function()
     {
-        console.log(self.taskText);
         if(!self.taskText)
             return false;
 

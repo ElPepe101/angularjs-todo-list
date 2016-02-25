@@ -55,3 +55,10 @@ app.directive("tasks", ["Task", function(Task) {
         }
     };
 }]);
+
+app.directive("form", [function() {
+    return {
+        templateUrl: "/partial/form",
+        link: function(scope, element, attr) {}
+    };
+}]);
