@@ -36,7 +36,7 @@
                 <form role="form">
                     <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
                 </form>
-                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTaskInList()">Add</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTask()">Add</button>
             </div>
 
             <div class="todo-list">
@@ -46,10 +46,14 @@
         </script>
 
         <script type="text/ng-template" id="/partial/task">
-            <ul class="list-unstyled" data-tasks></ul>
-                <li data-ng-repeat="task in list.tasks">
-                    {{todo.text}}
-                    <button type="button" class="close" aria-label="Close">
+            <ul class="list-unstyled"></ul>
+                <li class="checkbox" data-ng-repeat="task in list.tasks">
+                    <label>
+                        <input type="checkbox" value="" ng-model="task.status" ng-click="list.completeTask()"/>
+                        <span class="done-{{task.status}}">{{task.text}}</span>
+                    </label>
+
+                    <button type="button" class="close" aria-label="Close" ng-click="list.removeTask()">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>

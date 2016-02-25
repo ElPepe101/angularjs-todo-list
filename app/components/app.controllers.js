@@ -11,9 +11,9 @@ app.controller("homeCtrl", ["Task", function(Task)
 
     self.tasks = Task.getTasks(self.currentList);
 
-    self.addTaskInList = function()
+    self.addTask = function()
     {
-        console.log(self.taskText)
+        console.log(self.taskText);
         if(!self.taskText)
             return false;
 
@@ -21,14 +21,19 @@ app.controller("homeCtrl", ["Task", function(Task)
         return Task.changeTaskList(id, self.currentList);
     };
 
-    self.completeTaskInList = function(taskId)
+    self.completeTask = function(taskId)
     {
 
     };
 
-    self.changeList = function(listId)
+    self.changeListTo = function(listId)
     {
         self.tasks = Task.getTasks(self.currentList);
+    };
+
+    self.removeTask = function()
+    {
+
     };
 }]);
 
