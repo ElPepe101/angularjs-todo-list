@@ -2,6 +2,8 @@
 
 var app = angular.module("app", ['ngRoute', 'ngAnimate']);
 
+app.constant('_', window._);
+
 app.config(['$routeProvider', function ($routeProvider)
 {
     $routeProvider
@@ -9,7 +11,7 @@ app.config(['$routeProvider', function ($routeProvider)
 			page: '/',
 			templateUrl: '/view/home',
 			controller: 'homeCtrl',
-            controllerAs: 'home'
+            controllerAs: 'list'
 		})
         .otherwise({
             redirectTo: '/'

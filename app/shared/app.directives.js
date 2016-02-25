@@ -47,10 +47,11 @@ app.directive('metadata', ['$rootScope', function($rootScope)
     };
 }]);
 
-app.directive("task", ["Task", function(Task) {
+app.directive("tasks", ["Task", function(Task) {
     return {
+        templateUrl: "/partial/task",
         link: function(scope, element, attr) {
-            
+
         }
     };
 }]);

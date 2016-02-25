@@ -1,6 +1,6 @@
 "use strict";
 
-app.service("Task", [function()
+app.service("Task", ["_", function(_)
 {
     /**
      * Private property
@@ -16,7 +16,7 @@ app.service("Task", [function()
     var collection = [
         {
             "id": 0,
-            "text": "sample",
+            "text": "Sample text for To-Do list",
             "status": 0,
             "list": 0
         }
@@ -117,9 +117,26 @@ app.service("Task", [function()
         return task;
     };
 
+    /**
+     * Move task to given list id
+     * @param  {Integer} taskId id Int to match in collection[i].id
+     * @param  {Integer} listId list id
+     * @return {Boolean} True if changed, false on error
+     */
     task.changeTaskList = function(taskId, listId)
     {
         return true;
+    };
+
+    /**
+     * Obtain all task in collection
+     * @param  {Integer} listId id Int to match in collection[i].list
+     * @return {Array} Matched objects
+     */
+    task.getTasks = function(listId)
+    {
+        var tasks = collection;
+        return tasks;
     };
 
     return task;

@@ -1,14 +1,23 @@
 "use strict";
 
+/**
+ * Home view controller
+ */
 app.controller("homeCtrl", ["Task", function(Task)
 {
     var self = this;
 
     self.currentList = 0;
 
-    self.addTaskInList = function(taskText)
+    self.tasks = Task.getTasks(self.currentList);
+
+    self.addTaskInList = function()
     {
-        var id = Task.addTask();
+        console.log(self.taskText)
+        if(!self.taskText)
+            return false;
+
+        var id = Task.addTask(self.taskText);
         return Task.changeTaskList(id, self.currentList);
     };
 
@@ -16,9 +25,25 @@ app.controller("homeCtrl", ["Task", function(Task)
     {
 
     };
+
+    self.changeList = function(listId)
+    {
+        self.tasks = Task.getTasks(self.currentList);
+    };
 }]);
 
+/**
+ * Archive view controller
+ */
 app.controller("archiveCtrl", ["Task", function(Task)
+{
+    var self = this;
+}]);
+
+/**
+ * Search view controller
+ */
+app.controller("searchCtrl", ["Task", function(Task)
 {
     var self = this;
 }]);

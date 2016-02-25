@@ -2,8 +2,11 @@
 <html data-ng-app="app" data-ng-strict-di>
     <head>
         <title>AngularJS To-Do List Exercise</title>
+        <meta charset="utf-8">
+
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="assets/styles.css" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
         <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
         <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular-route.min.js"></script>
         <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular-animate.min.js"></script>
@@ -12,7 +15,7 @@
         <script type="text/javascript" src="app/shared/app.directives.js"></script>
         <script type="text/javascript" src="app/components/app.controllers.js"></script>
     </head>
-    <body class-route>
+    <body class="todo" data-class-route>
         <div class="container">
             <header>
                 <h1>To-Do <small>List</small></h1>
@@ -22,29 +25,36 @@
             </main>
             <footer></footer>
         </div>
+
+        <!-- INI TEMPLATES -->
+        <script type="text/ng-template" id="/view/test">
+            <h2>Lorem ipsum...</h2>
+        </script>
+
+        <script type="text/ng-template" id="/view/home">
+            <div class="todo-form">
+                <form role="form">
+                    <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
+                </form>
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTaskInList()">Add</button>
+            </div>
+
+            <div class="todo-list">
+                <div data-tasks></div>
+            </div>
+
+        </script>
+
+        <script type="text/ng-template" id="/partial/task">
+            <ul class="list-unstyled" data-tasks></ul>
+                <li data-ng-repeat="task in list.tasks">
+                    {{todo.text}}
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </li>
+            </ul>
+        </script>
+        <!-- END TEMPLATES -->
     </body>
-
-    <!-- INI TEMPLATES -->
-    <script type="text/ng-template" id="/view/test">
-        <h2>Lorem ipsum...</h2>
-    </script>
-
-    <script type="text/ng-template" id="/view/home">
-        <form role="form">
-            <input type="text" class="form-control" placeholder="Your Task" name="task">
-        </form>
-        <button type="button" class="btn btn-primary btn-lg btn-block">Add</button>
-
-        <ul class="list-unstyled"></ul>
-    </script>
-
-    <script type="text/ng-template" id="partial/list">
-        <li data-ng-repeat="todo in todos">
-            {{todo.text}}
-            <button type="button" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </li>
-    </script>
-    <!-- END TEMPLATES -->
 </html>
