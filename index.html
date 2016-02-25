@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html data-ng-app="app" data-ng-strict-di>
+    <head>
+        <title>AngularJS To-Do List Exercise</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/styles.css" />
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular-route.min.js"></script>
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.8/angular-animate.min.js"></script>
+        <script type="text/javascript" src="app/app.js"></script>
+        <script type="text/javascript" src="app/shared/app.services.js"></script>
+        <script type="text/javascript" src="app/shared/app.directives.js"></script>
+        <script type="text/javascript" src="app/components/app.controllers.js"></script>
+    </head>
+    <body class-route>
+        <div class="container">
+            <header>
+                <h1>To-Do <small>List</small></h1>
+            </header>
+            <main>
+                <div data-ng-view></div>
+            </main>
+            <footer></footer>
+        </div>
+    </body>
+
+    <!-- INI TEMPLATES -->
+    <script type="text/ng-template" id="/view/test">
+        <h2>Lorem ipsum...</h2>
+    </script>
+
+    <script type="text/ng-template" id="/view/home">
+        <form role="form">
+            <input type="text" class="form-control" placeholder="Your Task" name="task">
+        </form>
+        <button type="button" class="btn btn-primary btn-lg btn-block">Add</button>
+
+        <ul class="list-unstyled"></ul>
+    </script>
+
+    <script type="text/ng-template" id="partial/list">
+        <li data-ng-repeat="todo in todos">
+            {{todo.text}}
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+    </script>
+    <!-- END TEMPLATES -->
+</html>

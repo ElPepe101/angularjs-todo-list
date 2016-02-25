@@ -1,0 +1,29 @@
+{
+  "name": "angularjs-todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "browser-sync": "^2.11.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElPepe101/angularjs-todo-list.git"
+  },
+  "keywords": [
+    "todo",
+    "list"
+  ],
+  "author": "ElPepe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElPepe101/angularjs-todo-list/issues"
+  },
+  "homepage": "https://github.com/ElPepe101/angularjs-todo-list"
+}
