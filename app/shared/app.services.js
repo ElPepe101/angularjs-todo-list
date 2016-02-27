@@ -1,6 +1,6 @@
 "use strict";
 
-app.service("Task", ["_", "$rootScope", function(_, $rootScope)
+app.service("Task", ["_", "$rootScope", "$window", function(_, $rootScope, $window)
 {
     /**
      * [preprocesed description]
@@ -181,7 +181,8 @@ app.service("Task", ["_", "$rootScope", function(_, $rootScope)
                 result.push(fig);
         }
         console.log("Collection changed: ", JSON.stringify(result), collection.length, collector.length);
-        //preprocesed = JSON.stringify(collection + collector).btoa();
+        preprocesed = $window.btoa(JSON.stringify(collection + collector));
+        //console.log(preprocesed, [collection + collector]);
     },
     true);
 
