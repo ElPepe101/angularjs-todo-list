@@ -36,33 +36,43 @@
         <script type="text/ng-template" id="/view/home">
             <!-- list="list.currentList" text="list.taskText" -->
             <!-- data-controller-name="homeCtrl" -->
-            <div class="todo-form" data-tasker></div>
-            <div class="todo-list" data-tasks></div>
+            <div class="todo-form view" data-tasker></div>
+            <div class="todo-list view" data-tasks></div>
         </script>
 
         <!-- Partial: form -->
         <script type="text/ng-template" id="/partial/form">
-            <form role="form">
-                <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
-                <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTask()">Add Task</button>
-            </form>
+            <div class="row">
+                <div class="col-xs-8">
+                    <form role="form">
+                        <input type="text" class="form-control" placeholder="Your Task" name="task" data-ng-model="list.taskText">
+                    </form>
+                </div>
+                <div class="col-xs-4">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="list.addTask()">Add Task</button>
+                </div>
+            </div>
         </script>
 
         <!-- Partial: task -->
         <script type="text/ng-template" id="/partial/task">
-            <ul class="list-unstyled"></ul>
-                <li class="checkbox" data-ng-repeat="task in list.tasks">
-                    <label>
-                        <!-- ng-model="task.stat" -->
-                        <input type="checkbox" value="" ng-click="list.completeTask(task.id)"/>
-                        <span class="done-{{task.stat}}">{{task.text}}</span>
-                    </label>
+            <div class="row">
+                <div class="col col-xs-8">
+                    <ul class="list-unstyled">
+                        <li class="checkbox" data-ng-repeat="task in list.tasks">
+                            <label>
+                                <!-- ng-model="task.stat" -->
+                                <input type="checkbox" value="" ng-click="list.completeTask(task.id)"/>
+                                <span class="done-{{task.stat}}">{{task.text}}</span>
+                            </label>
 
-                    <button type="button" class="close" aria-label="Close" ng-click="list.removeTask(task.id)">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </li>
-            </ul>
+                            <button type="button" class="close" aria-label="Close" ng-click="list.removeTask(task.id)">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </script>
         <!-- END TEMPLATES -->
     </body>

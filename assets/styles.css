@@ -18,3 +18,28 @@ body {
 .ng-enter-active {
     opacity: 1;
 }
+
+.view {
+    padding: 15px 5px;
+}
+
+.todo-list .col {
+    padding: 0 15px;
+}
+
+.todo-list .col ul {
+    background-color: #eee;
+    border-radius: 5px;
+    display: block;
+    padding: 5px 15px;
+    color: black;
+}
+
+.close:hover {
+    color: red;
+    background-color: #eee;
+}
+
+.todo-form .form-control {
+    margin: 12px 0 0;
+}

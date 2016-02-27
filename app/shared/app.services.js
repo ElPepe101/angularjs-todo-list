@@ -3,6 +3,12 @@
 app.service("Task", ["_", "$rootScope", function(_, $rootScope)
 {
     /**
+     * [preprocesed description]
+     * @type {String}
+     */
+    var preprocesed = "";
+
+    /**
      * Private property
      *
      * The task collection
@@ -66,10 +72,13 @@ app.service("Task", ["_", "$rootScope", function(_, $rootScope)
      */
     var archiveTask = function(id)
     {
-        var index = getTask(id);
-        var task = collection[index];
-        collection.splice(index, 1);
+        // Store task in collector
+        var task = getTask(id);
         collector.push(task);
+        // Remove task from collection
+        var index = getTask(id, true);
+        collection.splice(collection[index], 1);
+
         return task;
     };
 
@@ -109,7 +118,7 @@ app.service("Task", ["_", "$rootScope", function(_, $rootScope)
      */
     var searchTasks = function(text)
     {
-        return [];
+        return _.find(collection, { "text": text });
     };
 
     /**
@@ -119,7 +128,13 @@ app.service("Task", ["_", "$rootScope", function(_, $rootScope)
      */
     var restoreTask = function(id)
     {
-        var task = {};
+        // Restore task on collection
+        var task = _.find(collector, { "id": id });
+        collector.push(task);
+        // Remove task from collector
+        var index = _.findIndex(collector, { "id": id });
+        collection.splice(collection[index], 1);
+
         return task;
     };
 
@@ -166,6 +181,7 @@ app.service("Task", ["_", "$rootScope", function(_, $rootScope)
                 result.push(fig);
         }
         console.log("Collection changed: ", JSON.stringify(result), collection.length, collector.length);
+        //preprocesed = JSON.stringify(collection + collector).btoa();
     },
     true);
 
