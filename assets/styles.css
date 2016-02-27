@@ -4,6 +4,7 @@ body {
 }
 
 .done-true {
+    transition: color 0.15s ease;
     text-decoration: line-through;
     background-color: #fff;
     color: #ddd;

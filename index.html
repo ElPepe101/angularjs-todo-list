@@ -34,7 +34,9 @@
 
         <!-- View: home -->
         <script type="text/ng-template" id="/view/home">
-            <div class="todo-form" data-form list="list.currentList" text="list.taskText"></div>
+            <!-- list="list.currentList" text="list.taskText" -->
+            <!-- data-controller-name="homeCtrl" -->
+            <div class="todo-form" data-tasker></div>
             <div class="todo-list" data-tasks></div>
         </script>
 
@@ -51,11 +53,12 @@
             <ul class="list-unstyled"></ul>
                 <li class="checkbox" data-ng-repeat="task in list.tasks">
                     <label>
-                        <input type="checkbox" value="" ng-model="task.status" ng-click="list.completeTask()"/>
-                        <span class="done-{{task.status}}">{{task.text}}</span>
+                        <!-- ng-model="task.stat" -->
+                        <input type="checkbox" value="" ng-click="list.completeTask(task.id)"/>
+                        <span class="done-{{task.stat}}">{{task.text}}</span>
                     </label>
 
-                    <button type="button" class="close" aria-label="Close" ng-click="list.removeTask()">
+                    <button type="button" class="close" aria-label="Close" ng-click="list.removeTask(task.id)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </li>

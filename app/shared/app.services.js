@@ -1,6 +1,6 @@
 "use strict";
 
-app.service("Task", ["_", function(_)
+app.service("Task", ["_", "$rootScope", function(_, $rootScope)
 {
     /**
      * Private property
@@ -9,7 +9,7 @@ app.service("Task", ["_", function(_)
      * Every object has the following attributes:
      * 		id {Integer} Autoincrement
      * 		text {String} The text to display
-     * 		status {Integer} 0=incomplete, 1=complete
+     * 		status {Integer} false=incomplete, true=complete
      * 		list {Integer} n:1 relation for the list catalog
      * @type {Array}
      */
@@ -17,7 +17,7 @@ app.service("Task", ["_", function(_)
         {
             "id": 0,
             "text": "Sample text for To-Do list",
-            "status": 0,
+            "stat": false,
             "list": 0
         }
     ];
@@ -43,14 +43,14 @@ app.service("Task", ["_", function(_)
      * @param  {String} text The text to display on task
      * @return {Integer} New task id
      */
-    task.addTask = function(text)
+    var addTask = function(text)
     {
         // Autoincrement id value based on active and archived tasks
         var id = collection.length + collector.length;
         collection.push({
             "id": id,
             "text": text,
-            "status": 0,
+            "stat": false,
             "list": 0
         });
         return id;
@@ -64,9 +64,12 @@ app.service("Task", ["_", function(_)
      * @param  {Integer} id Int to match in collection[i].id
      * @return {Object} task object
      */
-    task.archiveTask = function(id)
+    var archiveTask = function(id)
     {
-        var task = {};
+        var index = getTask(id);
+        var task = collection[index];
+        collection.splice(index, 1);
+        collector.push(task);
         return task;
     };
 
@@ -77,9 +80,10 @@ app.service("Task", ["_", function(_)
      * @param  {Integer} id Int to match in collection[i].id
      * @return {Object} task object
      */
-    task.toggleCompleteTask = function(id)
+    var toggleCompleteTask = function(id)
     {
-        var task = {};
+        var task = getTask(id);
+        task.stat = !task.stat;
         return task;
     };
 
@@ -90,10 +94,12 @@ app.service("Task", ["_", function(_)
      * @param  {Integer} id Int to match in collection[i].id
      * @return {Object} task object
      */
-    task.getTask = function(id)
+    var getTask = function(id, index)
     {
-        var task = {};
-        return task;
+        if(index)
+            return _.findIndex(collection, { "id": id });
+
+        return _.find(collection, { "id": id });
     };
 
     /**
@@ -101,7 +107,7 @@ app.service("Task", ["_", function(_)
      * @param  {String} text String to match in collection[i].text
      * @return {Array} Matched objects
      */
-    task.searchTasks = function(text)
+    var searchTasks = function(text)
     {
         return [];
     };
@@ -111,7 +117,7 @@ app.service("Task", ["_", function(_)
      * @param  {Integer} id Int to match in collection[i].id
      * @return {Object} task object
      */
-    task.restoreTask = function(id)
+    var restoreTask = function(id)
     {
         var task = {};
         return task;
@@ -121,11 +127,13 @@ app.service("Task", ["_", function(_)
      * Move task to given list id
      * @param  {Integer} taskId id Int to match in collection[i].id
      * @param  {Integer} listId list id
-     * @return {Boolean} True if changed, false on error
+     * @return {Object} task object
      */
-    task.changeTaskList = function(taskId, listId)
+    var changeTaskList = function(taskId, listId)
     {
-        return true;
+        var task = getTask(taskId);
+        task.list = listId;
+        return task;
     };
 
     /**
@@ -133,11 +141,42 @@ app.service("Task", ["_", function(_)
      * @param  {Integer} listId id Int to match in collection[i].list
      * @return {Array} Matched objects
      */
-    task.getTasks = function(listId)
+    var getTasks = function(listId)
     {
-        var tasks = collection;
-        return tasks;
+        return collection;
     };
 
-    return task;
+
+    $rootScope.$watch(function() {
+        return collection;
+    }, function(newCollection, oldCollection)
+    {
+        var result = [];
+        for(var i in newCollection) {
+            var fig = {};
+            for(var j in newCollection[i]) {
+                if(newCollection[i].hasOwnProperty(j) && j !== "$$hashKey") {
+                    if(!oldCollection[i] || newCollection[i][j] !== oldCollection[i][j]) {
+                        fig.id = newCollection[i].id;
+                        fig[j] = newCollection[i][j];
+                    }
+                }
+            }
+            if(!_.isEmpty(fig))
+                result.push(fig);
+        }
+        console.log("Collection changed: ", JSON.stringify(result), collection.length, collector.length);
+    },
+    true);
+
+    return {
+        getTasks: getTasks,
+        changeTaskList: changeTaskList,
+        restoreTask: restoreTask,
+        searchTasks: searchTasks,
+        getTask: getTask,
+        addTask: addTask,
+        archiveTask: archiveTask,
+        toggleCompleteTask: toggleCompleteTask
+    };
 }]);

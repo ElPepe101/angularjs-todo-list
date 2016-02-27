@@ -47,46 +47,16 @@ app.directive('metadata', ['$rootScope', function($rootScope)
     };
 }]);
 
-app.directive("tasks", ["Task", function(Task) {
+app.directive("tasks", ["Task", function(Task)
+{
     return {
-        templateUrl: "/partial/task",
-        link: function(scope, element, attr) {
-
-        }
+        templateUrl: "/partial/task"
     };
 }]);
 
-app.directive("form", ["Task", function(Task) {
-
-    //var $button = angular.element('<button type="button" class="btn btn-primary btn-lg btn-block" data-ng-click="addTask(list, text)">Add Task</button>');
-
-    /*var link = function(scope)
-    {
-        scope.addTask = function(list, text)
-        {
-            console.log(list, text);
-            return;
-            //list="{{list.currentList}}"
-            if(!text)
-                return false;
-
-            var id = Task.addTask(text);
-            return Task.changeTaskList(id, list);
-        };
-        $button.addClass("btn btn-primary btn-lg btn-block");
-    };*/
-
+app.directive("tasker", [function()
+{
     return {
-        controllerAs: "list",
-        templateUrl: "/partial/form",
-        /*scope: {
-            list: "=",
-            text: "="
-        },
-        compile: function($template)
-        {
-            $template.append($button);
-            return link;
-        }*/
+        templateUrl: "/partial/form"
     };
 }]);

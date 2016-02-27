@@ -35,7 +35,7 @@ app.controller("homeCtrl", ["Task", function(Task)
 
     self.completeTask = function(taskId)
     {
-
+        Task.toggleCompleteTask(taskId);
     };
 
     self.changeListTo = function(listId)
@@ -43,9 +43,9 @@ app.controller("homeCtrl", ["Task", function(Task)
         self.tasks = Task.getTasks(self.currentList);
     };
 
-    self.removeTask = function()
+    self.removeTask = function(taskId)
     {
-
+        Task.archiveTask(taskId);
     };
 }]);
 
